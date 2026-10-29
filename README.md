@@ -4,6 +4,8 @@ A browsable copy of the [Hiking Safety Assistant](https://github.com/Swiss-ai-We
 built at the Swiss {ai} Weeks Agentic AI Hackathon in Geneva. It runs with no backend, so it can sit on
 GitHub Pages and be opened from a link.
 
+### → [k-oldbulls.github.io/hiking-safety-demo](https://k-oldbulls.github.io/hiking-safety-demo/)
+
 **Open it on a phone, or narrow the window.** The app is mobile-first.
 
 <p align="center">

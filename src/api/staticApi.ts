@@ -8,7 +8,6 @@
  * re-colours the route with no request at all.
  */
 import type { Answer, AssessmentData, Narration, PlaceResult, Route, RouteRequest } from '../domain/types'
-import { setSnapshot } from '../demo'
 import { ApiError } from './client'
 
 interface Bundle {
@@ -37,10 +36,14 @@ function load(): Promise<Bundle> {
     file<Bundle['searches']>('searches'),
     file<Bundle['pairs']>('pairs'),
     file<Bundle['meta']>('meta'),
-  ]).then(([routes, assessments, narrations, searches, pairs, meta]) => {
-    setSnapshot(meta)
-    return { routes, assessments, narrations, searches, pairs, meta }
-  })
+  ]).then(([routes, assessments, narrations, searches, pairs, meta]) => ({
+    routes,
+    assessments,
+    narrations,
+    searches,
+    pairs,
+    meta,
+  }))
   return bundle
 }
 

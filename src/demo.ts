@@ -9,20 +9,16 @@
  * Two things are simulated, and both are stated on screen: the day is pinned to the captured date,
  * and the clock is moved to that morning so field mode has a hike in progress to show.
  */
+import { CAPTURED_AT, SNAPSHOT_DATE } from './demoMeta.generated'
+
 export const IS_STATIC = import.meta.env.VITE_STATIC === '1'
 
-/** The hike day every captured forecast belongs to. Replaced from `meta.json` at boot. */
-export let SNAPSHOT_DATE = '2026-10-31'
-export let CAPTURED_AT = ''
+/** The hike day the captured forecast is for, and when it was taken: both fixed at build time. */
+export { CAPTURED_AT, SNAPSHOT_DATE }
 
 /** Field mode is shown mid-morning on the snapshot day: walking, and before the turnaround. */
 const DEMO_CLOCK_HOUR = 8
 const DEMO_CLOCK_MINUTE = 30
-
-export function setSnapshot(meta: { date: string; capturedAt: string }) {
-  SNAPSHOT_DATE = meta.date
-  CAPTURED_AT = meta.capturedAt
-}
 
 /**
  * Moves the page's clock to the snapshot morning, keeping it ticking from there.

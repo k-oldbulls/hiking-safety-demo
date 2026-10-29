@@ -59,3 +59,11 @@ export const DEMO_ROUTES: DemoRoute[] = """
 out = pathlib.Path("src/demoRoutes.generated.ts")
 out.write_text(header + json.dumps(entries, ensure_ascii=False, indent=2) + "\n")
 print(f"wrote {out} with {len(entries)} routes for {meta['date']}")
+
+snapshot = pathlib.Path("src/demoMeta.generated.ts")
+snapshot.write_text(
+    "/** When the captured data is for, and when it was taken. Written by scripts/gen_routes.py. */\n"
+    f"export const SNAPSHOT_DATE = '{meta['date']}'\n"
+    f"export const CAPTURED_AT = '{meta['capturedAt']}'\n"
+)
+print(f"wrote {snapshot}: {meta['date']}, captured {meta['capturedAt'][:10]}")

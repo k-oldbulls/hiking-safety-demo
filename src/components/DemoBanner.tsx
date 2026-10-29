@@ -1,22 +1,14 @@
-import { CAPTURED_AT, SNAPSHOT_DATE } from '../demo'
-
-const DAY = { weekday: 'short', day: 'numeric', month: 'short' } as const
-
-function day(iso: string): string {
-  const [y, m, d] = iso.split('-').map(Number)
-  if (!y) return iso
-  return new Intl.DateTimeFormat('en-GB', DAY).format(new Date(y, m - 1, d))
-}
+import { CAPTURED_LABEL, SNAPSHOT_LABEL } from '../demoMeta.generated'
 
 /**
  * Says what this build is, on every screen.
  *
  * A safety tool that quietly showed a week-old forecast as today's would be the exact failure the
  * app is built to avoid, so the snapshot is named where it cannot be missed: the day the briefing
- * is for, and the day its forecast was taken.
+ * is for, and the day its forecast was taken. Both labels are written at build time, so this
+ * renders the same on first paint as it does later, and owes nothing to the demo clock.
  */
 export function DemoBanner({ dark }: { dark: boolean }) {
-  const captured = CAPTURED_AT ? day(CAPTURED_AT.slice(0, 10)) : ''
   return (
     <div
       className={`flex items-baseline justify-center gap-1.5 px-3 py-1.5 text-center text-[11px] leading-tight ${
@@ -25,7 +17,7 @@ export function DemoBanner({ dark }: { dark: boolean }) {
     >
       <span className="font-semibold tracking-wide uppercase">Demo</span>
       <span>
-        real briefing for {day(SNAPSHOT_DATE)}, captured {captured} — not live
+        real briefing for {SNAPSHOT_LABEL}, captured {CAPTURED_LABEL} — not live
       </span>
     </div>
   )

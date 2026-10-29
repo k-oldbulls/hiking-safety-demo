@@ -6,6 +6,13 @@ GitHub Pages and be opened from a link.
 
 **Open it on a phone, or narrow the window.** The app is mobile-first.
 
+<p align="center">
+  <img src="docs/screens/picker.png" alt="Route picker with six captured routes" width="200">
+  <img src="docs/screens/hazards.png" alt="Hazard check: wind gusts flagged moderate" width="200">
+  <img src="docs/screens/partial.png" alt="Partially assessed: two segments not evaluated" width="200">
+  <img src="docs/screens/field.png" alt="Field mode on the trail" width="200">
+</p>
+
 ## What this is
 
 The real app routes over swisstopo's official hiking network, pulls the MeteoSwiss ICON forecast for the

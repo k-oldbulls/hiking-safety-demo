@@ -35,7 +35,8 @@ function ToBriefing({ step }: { step?: number }) {
   return <Navigate to={`/briefing${query ? `?${query}` : ''}`} replace />
 }
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
   {
     path: '/',
     element: <AppShell />,
@@ -94,7 +95,10 @@ const router = createBrowserRouter([
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },
-])
+  ],
+  // Served from `/<repo>/` on a project page, and from `/` everywhere else; Vite fills it in.
+  { basename: import.meta.env.BASE_URL },
+)
 
 export default function App() {
   return <RouterProvider router={router} />

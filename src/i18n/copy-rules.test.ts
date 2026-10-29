@@ -11,7 +11,9 @@ import { BASE_PLACEHOLDERS, FACT_PLACEHOLDERS, hazardParams, narratedBody } from
  * what they produce). `pytest --record` replaces the answers with a real model's.
  */
 type NarrationFixture = { recorded: boolean; hazards: HazardDef[]; served: Record<Lang, Narration> }
-const narrationFixtures = import.meta.glob<NarrationFixture>('../../../backend/tests/fixtures/narration_*.json', {
+// Served narration, captured from the backend when a model was behind it: this demo has none,
+// but the copy rules it must obey are still worth checking against a real sample.
+const narrationFixtures = import.meta.glob<NarrationFixture>('../test/fixtures/narration_*.json', {
   eager: true,
   import: 'default',
 })

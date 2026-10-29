@@ -16,7 +16,7 @@ export interface DemoRoute {
 export const DEMO_ROUTES: DemoRoute[] = [
   {
     "name": "Grindelwald → Glecksteinhütte",
-    "blurbText": "T3 · 19.6 km · ↑1 517 m — gusts, cold, daylight",
+    "blurbText": "T3 · 19.6 km · ↑1 517 m — gusts, cold, daylight",
     "from": {
       "name": "Ort Grindelwald (BE) - Grindelwald",
       "latLng": [
@@ -34,7 +34,7 @@ export const DEMO_ROUTES: DemoRoute[] = [
   },
   {
     "name": "Oeschinensee → Blüemlisalphütte",
-    "blurbText": "T2 · 10.2 km · ↑1 200 m — gusts, cold, snow, daylight",
+    "blurbText": "T2 · 10.2 km · ↑1 200 m — gusts, cold, snow, daylight",
     "from": {
       "name": "See Oeschinensee (BE) - Kandersteg",
       "latLng": [
@@ -70,7 +70,7 @@ export const DEMO_ROUTES: DemoRoute[] = [
   },
   {
     "name": "Mürren → Schilthorn",
-    "blurbText": "T2 · 14.8 km · ↑1 350 m — cold, snow, daylight",
+    "blurbText": "T2 · 14.8 km · ↑1 350 m — cold, snow, daylight",
     "from": {
       "name": "Ort Mürren (BE) - Lauterbrunnen",
       "latLng": [
@@ -106,7 +106,7 @@ export const DEMO_ROUTES: DemoRoute[] = [
   },
   {
     "name": "Griesalp → Rotstockhütte",
-    "blurbText": "T2 · 19.9 km · ↑1 271 m — cold, snow, daylight",
+    "blurbText": "T2 · 19.9 km · ↑1 271 m — cold, snow, daylight",
     "from": {
       "name": "Ort Griesalp (BE) - Reichenbach im Kandertal",
       "latLng": [

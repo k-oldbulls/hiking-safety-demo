@@ -1,0 +1,174 @@
+{
+  "answers": {
+    "en": [
+      "{\"hazards\": [{\"id\": \"gusts-hohturli\", \"body\": \"Strong wind gusts {gust} km/h at {elevation} m above {place} make balance hard on exposed sections with fixed cables.\"}, {\"id\": \"showers-descent\", \"body\": \"Showers {precip} mm make rock slippery on the descent; hands are needed and a slip carries further.\"}]}"
+    ],
+    "fr": [
+      "{\"hazards\": [{\"id\": \"gusts-hohturli\", \"body\": \"Des vents violents {gust} km/h sont attendus à {place} entre {from} et {to}. La météo change vite en haute montagne {elevation} m; prévoyez une alternative.\"}, {\"id\": \"showers-descent\", \"body\": \"Des pluies {precip} mm sont prévues entre {from} et {to}. Le rocher devient glissant {thresholdMm} mm; la descente est le moment le plus critique.\"}]}"
+    ]
+  },
+  "hazards": [
+    {
+      "facts": {
+        "elevationM": 2778,
+        "gustKmh": 60,
+        "thresholdKmh": 40
+      },
+      "hasLiftsIf": true,
+      "id": "gusts-hohturli",
+      "kind": "gusts",
+      "place": "Hohtürli",
+      "provenance": "Rule WIND-EXP-02 v3 · SAC guidance · ICON-CH1 06:40 · SAC hiking scale",
+      "stops": {
+        "hohturli": [
+          {
+            "from": 630,
+            "severity": "mod",
+            "to": 660
+          },
+          {
+            "from": 660,
+            "severity": "high",
+            "to": 840
+          }
+        ],
+        "hutte": [
+          {
+            "from": 630,
+            "severity": "mod",
+            "to": 660
+          },
+          {
+            "from": 660,
+            "severity": "high",
+            "to": 840
+          }
+        ],
+        "moraine": [
+          {
+            "from": 630,
+            "severity": "mod",
+            "to": 840
+          }
+        ]
+      },
+      "window": {
+        "from": 660,
+        "to": 840
+      }
+    },
+    {
+      "facts": {
+        "freezingLevelM": 2900,
+        "precipMm": 1.2,
+        "thresholdMm": 0.5
+      },
+      "hasLiftsIf": false,
+      "id": "showers-descent",
+      "kind": "showers",
+      "provenance": "Rule PRECIP-DESC-01 v2 · ICON-CH1 06:40 · SAC hiking scale",
+      "stops": {
+        "descent": [
+          {
+            "from": 780,
+            "severity": "mod",
+            "to": 1080
+          }
+        ]
+      },
+      "window": {
+        "from": 780,
+        "to": 1080
+      }
+    }
+  ],
+  "model": "nemotron-3.5-lightning",
+  "note": "Hand-written stand-ins for a model's answers until `pytest --record` is run with NARRATION_* set; the fr showers body breaks the no-figures rule on purpose.",
+  "recorded": true,
+  "served": {
+    "en": {
+      "enabled": true,
+      "hazards": [
+        {
+          "body": "Strong wind gusts {gust} km/h at {elevation} m above {place} make balance hard on exposed sections with fixed cables.",
+          "citations": [
+            {
+              "id": "sac-scale-difficult-mountain-hiking",
+              "publisher": "Swiss Alpine Club SAC",
+              "title": "SAC Mountain and Alpine Hiking Scale — difficult mountain hiking",
+              "url": "https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Sicher_unterwegs/Sicher_unterwegs_Wandern/2020_Berg_Alpinwanderskala_EN.pdf"
+            },
+            {
+              "id": "sac-weather-planning",
+              "publisher": "Swiss Alpine Club SAC",
+              "title": "Safety when hiking — careful planning",
+              "url": "https://www.sac-cas.ch/en/training-and-safety/safety/safety-when-hiking/"
+            }
+          ],
+          "id": "gusts-hohturli"
+        },
+        {
+          "body": "Showers {precip} mm make rock slippery on the descent; hands are needed and a slip carries further.",
+          "citations": [
+            {
+              "id": "wet-rock",
+              "publisher": "Swiss Alpine Club SAC",
+              "title": "SAC Mountain and Alpine Hiking Scale — dry terrain",
+              "url": "https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Sicher_unterwegs/Sicher_unterwegs_Wandern/2020_Berg_Alpinwanderskala_EN.pdf"
+            },
+            {
+              "id": "sac-scale-difficult-mountain-hiking",
+              "publisher": "Swiss Alpine Club SAC",
+              "title": "SAC Mountain and Alpine Hiking Scale — difficult mountain hiking",
+              "url": "https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Sicher_unterwegs/Sicher_unterwegs_Wandern/2020_Berg_Alpinwanderskala_EN.pdf"
+            }
+          ],
+          "id": "showers-descent"
+        }
+      ],
+      "model": "nemotron-3.5-lightning"
+    },
+    "fr": {
+      "enabled": true,
+      "hazards": [
+        {
+          "body": "Des vents violents {gust} km/h sont attendus à {place} entre {from} et {to}. La météo change vite en haute montagne {elevation} m; prévoyez une alternative.",
+          "citations": [
+            {
+              "id": "sac-scale-difficult-mountain-hiking",
+              "publisher": "Swiss Alpine Club SAC",
+              "title": "SAC Mountain and Alpine Hiking Scale — difficult mountain hiking",
+              "url": "https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Sicher_unterwegs/Sicher_unterwegs_Wandern/2020_Berg_Alpinwanderskala_EN.pdf"
+            },
+            {
+              "id": "sac-weather-planning",
+              "publisher": "Swiss Alpine Club SAC",
+              "title": "Safety when hiking — careful planning",
+              "url": "https://www.sac-cas.ch/en/training-and-safety/safety/safety-when-hiking/"
+            }
+          ],
+          "id": "gusts-hohturli"
+        },
+        {
+          "body": "Des pluies {precip} mm sont prévues entre {from} et {to}. Le rocher devient glissant {thresholdMm} mm; la descente est le moment le plus critique.",
+          "citations": [
+            {
+              "id": "wet-rock",
+              "publisher": "Swiss Alpine Club SAC",
+              "title": "SAC Mountain and Alpine Hiking Scale — dry terrain",
+              "url": "https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Sicher_unterwegs/Sicher_unterwegs_Wandern/2020_Berg_Alpinwanderskala_EN.pdf"
+            },
+            {
+              "id": "sac-scale-difficult-mountain-hiking",
+              "publisher": "Swiss Alpine Club SAC",
+              "title": "SAC Mountain and Alpine Hiking Scale — difficult mountain hiking",
+              "url": "https://www.sac-cas.ch/fileadmin/Ausbildung_und_Sicherheit/Sicher_unterwegs/Sicher_unterwegs_Wandern/2020_Berg_Alpinwanderskala_EN.pdf"
+            }
+          ],
+          "id": "showers-descent"
+        }
+      ],
+      "model": "nemotron-3.5-lightning"
+    }
+  }
+}

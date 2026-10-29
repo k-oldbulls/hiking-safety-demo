@@ -1,28 +1,61 @@
-"""Rewrite src/demoRoutes.generated.ts from the captured data in public/data."""
-import json, pathlib, sys
+"""Rewrite src/demoRoutes.generated.ts from the captured data in public/data.
+
+Run after `capture.py`, so the picker lists what was actually captured and each blurb says what the
+hazard engine flagged on that route that day.
+"""
+
+import json
+import pathlib
+import sys
 
 data = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "public/data")
 routes = json.loads((data / "routes.json").read_text())
-assess = json.loads((data / "assessments.json").read_text())
+assessments = json.loads((data / "assessments.json").read_text())
 meta = json.loads((data / "meta.json").read_text())
-KIND = {"gusts": "gusts", "showers": "rain", "thunder": "thunder", "cold": "cold",
-        "snow": "snow", "visibility": "cloud", "daylight": "daylight"}
+
+KIND = {
+    "gusts": "gusts",
+    "showers": "rain",
+    "thunder": "thunder",
+    "cold": "cold",
+    "snow": "snow",
+    "visibility": "cloud",
+    "daylight": "daylight",
+}
+THIN_SPACE = " "
 
 entries = []
-for label, rid in meta["routeIds"].items():
-    route, assessment = routes[rid], assess[rid]
-    kinds = [KIND.get(h["kind"], h["kind"]) for h in assessment.get("hazards", [])]
-    ascent = f"{route[\'ascentM\']:,}".replace(",", "\u202f")
-    blurb = f"{route[\'grade\']} \u00b7 {route[\'distanceKm\']} km \u00b7 \u2191{ascent} m \u2014 " + (", ".join(kinds) or "nothing flagged")
-    entries.append({"name": label, "blurbText": blurb,
-                    "from": {"name": route["fromName"], "latLng": route["waypoints"][0]["latLng"]},
-                    "to": {"name": route["toName"], "latLng": route["waypoints"][-1]["latLng"]}})
+for label, route_id in meta["routeIds"].items():
+    route = routes[route_id]
+    kinds = [KIND.get(h["kind"], h["kind"]) for h in assessments[route_id].get("hazards", [])]
+    ascent = f"{route['ascentM']:,}".replace(",", THIN_SPACE)
+    flagged = ", ".join(kinds) if kinds else "nothing flagged"
+    entries.append(
+        {
+            "name": label,
+            "blurbText": f"{route['grade']} · {route['distanceKm']} km · ↑{ascent} m — {flagged}",
+            "from": {"name": route["fromName"], "latLng": route["waypoints"][0]["latLng"]},
+            "to": {"name": route["toName"], "latLng": route["waypoints"][-1]["latLng"]},
+        }
+    )
 
-body = ("/**\n * The routes this static demo ships, generated from the captured data.\n *\n"
-        " * Each is a real route the backend computed over swisstopo\'s network, with a real forecast\n"
-        f" * for {meta[\'date\']}; the blurb lists what the hazard engine flagged on it that day.\n */\n"
-        "import type { PlaceRef } from \'./domain/types\'\n\n"
-        "export interface DemoRoute {\n  name: string\n  blurbText: string\n  from: PlaceRef\n  to: PlaceRef\n}\n\n"
-        "export const DEMO_ROUTES: DemoRoute[] = " + json.dumps(entries, ensure_ascii=False, indent=2) + "\n")
-pathlib.Path("src/demoRoutes.generated.ts").write_text(body)
-print(f"wrote src/demoRoutes.generated.ts with {len(entries)} routes for {meta[\'date\']}")
+header = f"""/**
+ * The routes this static demo ships, generated from the captured data.
+ *
+ * Each is a real route the backend computed over swisstopo's network, with a real forecast
+ * for {meta["date"]}; the blurb lists what the hazard engine flagged on it that day.
+ */
+import type {{ PlaceRef }} from './domain/types'
+
+export interface DemoRoute {{
+  name: string
+  blurbText: string
+  from: PlaceRef
+  to: PlaceRef
+}}
+
+export const DEMO_ROUTES: DemoRoute[] = """
+
+out = pathlib.Path("src/demoRoutes.generated.ts")
+out.write_text(header + json.dumps(entries, ensure_ascii=False, indent=2) + "\n")
+print(f"wrote {out} with {len(entries)} routes for {meta['date']}")
